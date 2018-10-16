@@ -16,18 +16,17 @@ var timerknock;
 var timeInterval = 0;
 function calculateNewTime(fromId) {
   var currentTime = moment()
-  var predictedTime = moment().seconds(10)
+  var predictedTime = moment().hours(13).minutes(0).seconds(0)
   var diffTime = predictedTime.diff(currentTime)
   bot.sendMessage(fromId, "current: " + currentTime.format() + "\nExpected: " + predictedTime.format() + "\nDiffTime: " + diffTime);
   if(diffTime > 0) {
       timeInterval = diffTime
   } else if (diffTime == 0) {
-      timeInterval = 60000
+      timeInterval = 86400000
   } else {
-      timeInterval = 60000 + diffTime
+      timeInterval = 86400000 + diffTime
   }
 }
-
 
 function runNotif(fromId) {
   calculateNewTime(fromId)
