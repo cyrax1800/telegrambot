@@ -18,5 +18,3 @@ bot.on('message', function (msg) {
   var photo = 'cats.png';
   bot.sendPhoto(chatId, photo, {caption: 'Lovely kittens'});
 });
-
-module.exports = bot;
