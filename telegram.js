@@ -21,7 +21,7 @@ function calculateNewTime() {
   if(diffTime >= 0) {
       timeInterval = diffTime
   } else {
-      timeInterval = 60 - diffTime
+      timeInterval = 60000 - diffTime
   }
 }
 
