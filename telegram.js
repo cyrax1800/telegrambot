@@ -46,6 +46,7 @@ function runNotif(fromId) {
 
 bot.onText(/\/runnotif/, function (msg) {
   var fromId = msg.from.id;
+  bot.sendMessage(fromId, msg.toString());
   if(timerknock == null)
     runNotif(fromId)
   else 
