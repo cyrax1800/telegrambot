@@ -15,7 +15,7 @@ bot.onText(/\/echo (.+)/, function (msg, match) {
 var timerknock;
 var timeInterval = 0;
 function calculateNewTime() {
-    
+  timeInterval = 10000
 }
 
 
