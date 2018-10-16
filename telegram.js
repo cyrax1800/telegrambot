@@ -15,13 +15,21 @@ bot.onText(/\/echo (.+)/, function (msg, match) {
 var timerknock;
 var timeInterval = 0;
 function calculateNewTime() {
-  timeInterval = 10000
+  var currentTime = moment()
+  var predictedTime = moment().second(10)
+  var diffTime = predictedTime.subtract(currentTime).millisecond()
+  if(diffTime >= 0) {
+      timeInterval = diffTime
+  } else {
+      timeInterval = 60 - diffTime
+  }
 }
 
 
 function runNotif(fromId) {
   calculateNewTime()
   if(timeInterval <= 0) {
+    bot.sendMessage(fromId, "silahkan jalankan /runnotif lagi");
     return;
   }
   timerknock = setTimeout(function () {
