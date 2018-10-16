@@ -21,15 +21,14 @@ function calculateNewTime(fromId) {
   // bot.sendMessage(fromId, "current: " + currentTime.format() + "\nExpected: " + predictedTime.format() + "\nDiffTime: " + diffTime);
   if(diffTime > 0) {
       timeInterval = diffTime
-      bot.sendMessage(fromId, "Will standUp " + currentTime.to(predictedTime))
   } else if (diffTime == 0) {
       timeInterval = 86400000
-      bot.sendMessage(fromId, "Will standUp " + currentTime.to(predictedTime))
   } else {
       timeInterval = 86400000 + diffTime
-      predictedTime.milliseconds(86400000)
-      bot.sendMessage(fromId, "Will standUp " + currentTime.to(predictedTime))
+      predictedTime.milliseconds(timeInterval)
   }
+  predictedTime.milliseconds(timeInterval)
+  bot.sendMessage(fromId, "Will Stand Up " + currentTime.to(predictedTime))
 }
 
 function runNotif(fromId) {
