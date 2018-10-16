@@ -16,16 +16,20 @@ function runNotif(fromId) {
   timerknock = setTimeout(function () {
       bot.sendMessage(fromId, "lol");
       runNotif(fromId)
-  }, 5000);
+  }, 10000);
 }
 
 bot.onText(/\/runnotif/, function (msg) {
   var fromId = msg.from.id;
-  runNotif(fromId)
+  if(timerknock == null)
+    runNotif(fromId)
+  else 
+    bot.sendMessage(fromId, "jalankan /stopnotif sulu");
 });
 
 bot.onText(/\/stopnotif/, function (msg) {
   clearTimeout(timerknock);
+  timerknock = null
 });
 
 // Any kind of message
