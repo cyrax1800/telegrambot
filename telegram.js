@@ -15,7 +15,8 @@ var timerknock;
 function runNotif(fromId) {
   timerknock = setTimeout(function () {
       bot.sendMessage(fromId, "lol");
-  }, 5);
+      runNotif(notif)
+  }, 500);
 }
 
 bot.onText(/\/runnotif/, function (msg) {
