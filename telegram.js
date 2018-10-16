@@ -17,13 +17,14 @@ var timeInterval = 0;
 function calculateNewTime(fromId) {
   var currentTime = moment()
   var predictedTime = moment().second(10)
-  var diffTime = predictedTime.subtract(currentTime).millisecond()
+  var diffTime = predictedTime.subtract(currentTime).second()
   bot.sendMessage(fromId, "current: " + currentTime.format() + "\nExpected: " + predictedTime.format() + "\nDiffTime: " + diffTime);
   if(diffTime >= 0) {
       timeInterval = diffTime
   } else {
-      timeInterval = 60000 - diffTime
+      timeInterval = 60 + diffTime
   }
+  timeInterval = timeInterval * 1000
 }
 
 
@@ -37,7 +38,7 @@ function runNotif(fromId) {
     var date = moment()
       bot.sendMessage(fromId, date.format());
       runNotif(fromId)
-  }, 5000);
+  }, timeInterval);
 }
 
 bot.onText(/\/runnotif/, function (msg) {
