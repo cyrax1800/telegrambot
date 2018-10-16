@@ -19,8 +19,10 @@ function calculateNewTime(fromId) {
   var predictedTime = moment().seconds(10)
   var diffTime = predictedTime.diff(currentTime)
   bot.sendMessage(fromId, "current: " + currentTime.format() + "\nExpected: " + predictedTime.format() + "\nDiffTime: " + diffTime);
-  if(diffTime >= 0) {
+  if(diffTime > 0) {
       timeInterval = diffTime
+  } else if (diffTime == 0) {
+      timeInterval = 60000
   } else {
       timeInterval = 60000 + diffTime
   }
@@ -29,7 +31,7 @@ function calculateNewTime(fromId) {
 
 function runNotif(fromId) {
   calculateNewTime(fromId)
-  if(timeInterval <= 0) {
+  if(timeInterval < 0) {
     bot.sendMessage(fromId, "silahkan jalankan /runnotif lagi");
     return;
   }
