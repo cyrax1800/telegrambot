@@ -16,7 +16,7 @@ var timerknock;
 var timeInterval = 0;
 function calculateNewTime(fromId) {
   var currentTime = moment()
-  var predictedTime = moment().hours(13).minutes(0).seconds(0)
+  var predictedTime = moment().hours(7).minutes(0).seconds(0)
   var diffTime = predictedTime.diff(currentTime)
   bot.sendMessage(fromId, "current: " + currentTime.format() + "\nExpected: " + predictedTime.format() + "\nDiffTime: " + diffTime);
   if(diffTime > 0) {
