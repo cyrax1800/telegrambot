@@ -27,7 +27,8 @@ function calculateNewTime(fromId) {
       timeInterval = 86400000 + diffTime
   }
   var targetTime = currentTime.clone().milliseconds(timeInterval)
-  bot.sendMessage(fromId, "Will Stand Up " + currentTime.to(targetTime) + "\nJam: " + predictedTime.format() +  "\nJam: " + currentTime.format()+  "\nJam: " + targetTime.format())
+  // bot.sendMessage(fromId, "Will Stand Up " + currentTime.to(targetTime) + "\nJam: " + predictedTime.format() +  "\nJam: " + currentTime.format()+  "\nJam: " + targetTime.format())
+  bot.sendMessage(fromId, "Will Stand Up " + currentTime.to(targetTime))
 }
 
 function runNotif(fromId) {
