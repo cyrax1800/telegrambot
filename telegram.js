@@ -18,7 +18,7 @@ function calculateNewTime(fromId) {
   var currentTime = moment()
   var predictedTime = moment().hours(7).minutes(0).seconds(0)
   var diffTime = predictedTime.diff(currentTime)
-  bot.sendMessage(fromId, "current: " + currentTime.format() + "\nExpected: " + predictedTime.format() + "\nDiffTime: " + diffTime);
+  // bot.sendMessage(fromId, "current: " + currentTime.format() + "\nExpected: " + predictedTime.format() + "\nDiffTime: " + diffTime);
   if(diffTime > 0) {
       timeInterval = diffTime
   } else if (diffTime == 0) {
@@ -36,7 +36,7 @@ function runNotif(fromId) {
   }
   timerknock = setTimeout(function () {
     var date = moment()
-      bot.sendMessage(fromId, date.format());
+      bot.sendMessage(fromId, "Yuk Stand up yang remote masuk hangout yahhh <3 \n https://hangouts.google.com/hangouts/_/bukalapak.com/ngobrol");
       runNotif(fromId)
   }, timeInterval);
 }
