@@ -11,6 +11,23 @@ bot.onText(/\/echo (.+)/, function (msg, match) {
   bot.sendMessage(fromId, resp + "lol");
 });
 
+var timerknock;
+function runNotif(fromId) {
+  timerknock = setTimeout(function () {
+      bot.sendMessage(fromId, "lol");
+      runAtDate();
+  }, 5);
+}
+
+bot.onText(/\/runnotif/, function (msg) {
+  var fromId = msg.from.id;
+  runNotif(fromId)
+});
+
+bot.onText(/\/stopnotif/, function (msg) {
+  clearTimeout(timerknock);
+});
+
 // Any kind of message
 bot.on('message', function (msg) {
   var chatId = msg.chat.id;
