@@ -27,7 +27,7 @@ function calculateNewTime(fromId) {
       timeInterval = 86400000 + diffTime
   }
   predictedTime.milliseconds(timeInterval)
-  bot.sendMessage(fromId, "Will Stand Up " + currentTime.to(predictedTime))
+  bot.sendMessage(fromId, "Will Stand Up " + currentTime.to(predictedTime) + "Jam: " + predictedTime.format())
 }
 
 function runNotif(fromId) {
