@@ -19,13 +19,16 @@ function calculateNewTime(fromId) {
   var predictedTime = moment().hours(7).minutes(0).seconds(0)
   var diffTime = predictedTime.diff(currentTime)
   // bot.sendMessage(fromId, "current: " + currentTime.format() + "\nExpected: " + predictedTime.format() + "\nDiffTime: " + diffTime);
-  bot.sendMessage(fromId, "Will standUp in " + predictedTime.from(currentTime))
   if(diffTime > 0) {
       timeInterval = diffTime
+      bot.sendMessage(fromId, "Will standUp " + predictedTime.to(currentTime))
   } else if (diffTime == 0) {
       timeInterval = 86400000
+      bot.sendMessage(fromId, "Will standUp " + predictedTime.to(currentTime))
   } else {
       timeInterval = 86400000 + diffTime
+      predictedTime.milliseconds(86400000)
+      bot.sendMessage(fromId, "Will standUp " + predictedTime.to(currentTime))
   }
 }
 
