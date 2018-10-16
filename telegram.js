@@ -1,4 +1,5 @@
 var TelegramBot = require('node-telegram-bot-api');
+var moment = require('moment')
 
 var token = '639750851:AAEFhGOkWaK7PuJndnC5zUHahMuHRcLXKwM';
 // Setup polling way
@@ -12,11 +13,22 @@ bot.onText(/\/echo (.+)/, function (msg, match) {
 });
 
 var timerknock;
+var timeInterval = 0;
+function calculateNewTime() {
+    
+}
+
+
 function runNotif(fromId) {
+  calculateNewTime()
+  if(timeInterval <= 0) {
+    return;
+  }
   timerknock = setTimeout(function () {
-      bot.sendMessage(fromId, "lol");
+    var date = moment()
+      bot.sendMessage(fromId, date.format());
       runNotif(fromId)
-  }, 10000);
+  }, timeInterval);
 }
 
 bot.onText(/\/runnotif/, function (msg) {
@@ -24,7 +36,7 @@ bot.onText(/\/runnotif/, function (msg) {
   if(timerknock == null)
     runNotif(fromId)
   else 
-    bot.sendMessage(fromId, "jalankan /stopnotif sulu");
+    bot.sendMessage(fromId, "jalankan /stopnotif dulu");
 });
 
 bot.onText(/\/stopnotif/, function (msg) {
