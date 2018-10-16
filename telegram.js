@@ -14,10 +14,11 @@ bot.onText(/\/echo (.+)/, function (msg, match) {
 
 var timerknock;
 var timeInterval = 0;
-function calculateNewTime() {
+function calculateNewTime(fromId) {
   var currentTime = moment()
   var predictedTime = moment().second(10)
   var diffTime = predictedTime.subtract(currentTime).millisecond()
+  bot.sendMessage(fromId, "current: " + currentTime.format() + "\nExpected: " + predictedTime.format() + "\nDiffTime: " + diffTime);
   if(diffTime >= 0) {
       timeInterval = diffTime
   } else {
@@ -27,7 +28,7 @@ function calculateNewTime() {
 
 
 function runNotif(fromId) {
-  calculateNewTime()
+  calculateNewTime(fromId)
   if(timeInterval <= 0) {
     bot.sendMessage(fromId, "silahkan jalankan /runnotif lagi");
     return;
@@ -36,7 +37,7 @@ function runNotif(fromId) {
     var date = moment()
       bot.sendMessage(fromId, date.format());
       runNotif(fromId)
-  }, timeInterval);
+  }, 5000);
 }
 
 bot.onText(/\/runnotif/, function (msg) {
