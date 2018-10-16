@@ -17,14 +17,13 @@ var timeInterval = 0;
 function calculateNewTime(fromId) {
   var currentTime = moment()
   var predictedTime = moment().seconds(10)
-  var diffTime = predictedTime.subtract(currentTime).second()
+  var diffTime = predictedTime.diff(currentTime)
   bot.sendMessage(fromId, "current: " + currentTime.format() + "\nExpected: " + predictedTime.format() + "\nDiffTime: " + diffTime);
   if(diffTime >= 0) {
       timeInterval = diffTime
   } else {
-      timeInterval = 60 + diffTime
+      timeInterval = 60000 + diffTime
   }
-  timeInterval = timeInterval * 1000
 }
 
 
