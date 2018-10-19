@@ -22,7 +22,7 @@ var songsArray = [
   "/Rough",
   "/Navillera",
   "/Fingertip",
-  "/Lova_Whisper",
+  "/Love_Whisper",
   "/Summer_Rain",
   "/Time_For_The_Moon_Night",
   "/Sunny_Summer",
@@ -83,14 +83,15 @@ bot.onText(/\/run/, function (msg) {
   // var fromId = msg.from.id;
   var fromId = msg.chat.id;
   if (fromId in group) {
-    if (group[fromId] == null)
-      runNotif(fromId)
-    else
+    if (group[fromId] == null){
+      bot.sendMessage(fromId, "Hello, I'm Eunha from GFriend. I will remind you for daily standUp Meeting. Saranghae <3.")
+      calculateNewTime(fromId)
+    }else
       bot.sendMessage(fromId, "jalankan /stop dulu");
   }
 });
 
-bot.onText(/\/infon/, function (msg) {
+bot.onText(/\/info/, function (msg) {
   var fromId = msg.chat.id;
   bot.sendMessage(fromId, "Ih.. gak sabaren banget sih untuk tau kapan standup. masih ada sisa waktu " + moment(timeScheduleInterval[fromId]).toNow(true) + ". atau gk sabaran ketemu saya? <3");
   // calculateNewTime(fromId)
@@ -98,8 +99,13 @@ bot.onText(/\/infon/, function (msg) {
 
 bot.onText(/\/stop/, function (msg) {
   var fromId = msg.chat.id;
-  clearTimeout(group[fromId]);
-  delete group[fromId]
+  if(fromId in group) {
+    clearTimeout(group[fromId]);
+    delete group[fromId]
+    bot.sendMessage(fromId, "Goodbye my fans, I will miss you all. I always in your heart. If you miss me, you can call /run and I will join you again. <3.")
+  } else {
+    bot.sendMessage(fromId, "I already don't remind in this group again. Please if you miss me, just call /run and I will at your service. <3.")
+  }
 });
 
 bot.onText(/\/sing/, function (msg) {
@@ -114,31 +120,31 @@ bot.onText(/\/sing/, function (msg) {
 
 bot.onText(regexifyOptions(songsArray), function (msg, match) {
   var fromId = msg.chat.id;
-  var resp = match[1];
-  var index = songsArray.indexOf(resp)
-  bot.sendMessage(fromId, resp)
-  switch (index) {
-    case 0:
-      break;
-    case 1:
-      break;
-    case 2:
-      break;
-    case 3:
-      break;
-    case 4:
-      break;
-    case 5:
-      break;
-    case 6:
-      break;
-    case 7:
-      break;
-    case 8:
-      break;
-    case 9:
-      break;
-    default:
-      break;
-  }
+  bot.sendMessage(fromId, msg.chat.description)
+  // var resp = match[1];
+  // var index = songsArray.indexOf(resp)
+  // switch (index) {
+  //   case 0:
+  //     break;
+  //   case 1:
+  //     break;
+  //   case 2:
+  //     break;
+  //   case 3:
+  //     break;
+  //   case 4:
+  //     break;
+  //   case 5:
+  //     break;
+  //   case 6:
+  //     break;
+  //   case 7:
+  //     break;
+  //   case 8:
+  //     break;
+  //   case 9:
+  //     break;
+  //   default:
+  //     break;
+  // }
 })
