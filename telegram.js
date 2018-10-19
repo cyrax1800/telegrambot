@@ -13,7 +13,7 @@ bot.onText(/\/echo (.+)/, function (msg, match) {
 });
 
 function regexifyOptions(array) {
-  return new RegExp(array.toString().replace(/,/g, '|').replace(/\//g, '\\/'));
+  return new RegExp(array.toString().replace(/,/g, '|'));
 }
 
 var songsArray = [
@@ -59,6 +59,7 @@ function calculateNewTime(fromId, isAnnounceBefore = true) {
   } else if (targetTime.days() == 6) { // Saturday
     timeInterval += 86400000 * 2
   }
+  timeScheduleInterval[fromId] = timeInterval
   targetTime = currentTime.clone().milliseconds(timeInterval)
   // bot.sendMessage(fromId, "Will Stand Up " + currentTime.to(targetTime) + "\nJam: " + predictedTime.format() +  "\nJam: " + currentTime.format()+  "\nJam: " + targetTime.format())
   runNotif(fromId, isAnnounceBefore)
@@ -96,7 +97,11 @@ bot.onText(/\/run/, function (msg) {
 
 bot.onText(/\/info/, function (msg) {
   var fromId = msg.chat.id;
-  bot.sendMessage(fromId, "Ih.. gak sabaren banget sih untuk tau kapan standup. masih ada sisa waktu " + moment(timeScheduleInterval[fromId]).toNow(true) + ". atau gk sabaran ketemu saya? <3");
+  if (fromId in timeScheduleInterval) {
+    bot.sendMessage(fromId, "Ih.. gak sabaren banget sih untuk tau kapan standup. masih ada sisa waktu " + moment(timeScheduleInterval[fromId]).toNow(true) + ". atau gk sabaran ketemu saya? <3");
+  } else {
+    bot.sendMessage(fromId, "Ooops, maaf fans Eunha, belum ada schedule untuk next event nih, coba jalankan /run dulu, mana tau doa dari kamu dapat Eunha kabulkan <3.")
+  }
   // calculateNewTime(fromId)
 });
 
@@ -122,8 +127,10 @@ bot.onText(/\/sing/, function (msg) {
 });
 
 bot.onText(regexifyOptions(songsArray), function (msg, match) {
+  console.log(msg)
+  console.log(match)
   var fromId = msg.chat.id;
-  bot.sendMessage(fromId, msg.chat.description)
+  bot.sendMessage(fromId, "test")
   // var resp = match[1];
   // var index = songsArray.indexOf(resp)
   // switch (index) {
