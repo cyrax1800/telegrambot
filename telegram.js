@@ -88,7 +88,7 @@ bot.onText(/\/run/, function (msg) {
       bot.sendMessage(fromId, "Hello, I'm Eunha from GFriend. Eunha will remind you for daily standUp Meeting. Saranghae <3.")
       calculateNewTime(fromId)
     }else
-      bot.sendMessage(fromId, "Sabar dong fans Eunha, saya hanya bot Eunha yang cute, Tugas reminder yang di kasih sudah di jalankan koq, tunggu aja waktunya dalam " + timeScheduleInterval[fromId].format() + " atau jalan /stop untuk melupakan Eunha T_T.");
+      bot.sendMessage(fromId, "Sabar dong fans Eunha, saya hanya bot Eunha yang cute, Tugas reminder yang di kasih sudah di jalankan koq, tunggu aja waktunya dalam " + timeScheduleInterval[fromId].toNow(true) + " atau jalankan /stop untuk melupakan Eunha T_T.");
   } else {
     bot.sendMessage(fromId, "Hello, I'm Eunha from GFriend. Eunha will remind you for daily standUp Meeting. Saranghae <3.")
     calculateNewTime(fromId)
@@ -165,4 +165,11 @@ bot.onText(regexifyOptions(songsArray), function (msg, match) {
       bot.sendMessage(fromId, "Eunha is sorry, Eunha haven't sing " + resp.replace(/\//g, "").replace(/_/g, " "))
       break;
   }
+})
+
+bot.onText(/[WK]{5,}/, function(msg) {
+  var fromId = msg.chat.id;
+  var userName = msg.from.first_name
+
+  bot.sendMessage(from, "Eh " + userName + ", sabar dong, gak usah ngegas juga, Eunha tau kalau Eunha cure <3.")
 })
