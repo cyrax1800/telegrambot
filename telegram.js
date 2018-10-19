@@ -88,7 +88,7 @@ bot.onText(/\/run/, function (msg) {
       bot.sendMessage(fromId, "Hello, I'm Eunha from GFriend. I will remind you for daily standUp Meeting. Saranghae <3.")
       calculateNewTime(fromId)
     }else
-      bot.sendMessage(fromId, "jalankan /stop dulu");
+      bot.sendMessage(fromId, "Sabar dong fans Eunha, saya hanya bot Eunha yang cute, Tugas reminder yang di kasih sudah di jalankan koq, tunggu aja waktunya dalam " + timeScheduleInterval[fromId] + " " + moment(timeScheduleInterval[fromId]).format) + " atau jalan /stop untuk melupakan Eunha T_T.";
   } else {
     bot.sendMessage(fromId, "Hello, I'm Eunha from GFriend. I will remind you for daily standUp Meeting. Saranghae <3.")
     calculateNewTime(fromId)
@@ -129,30 +129,40 @@ bot.onText(/\/sing/, function (msg) {
 bot.onText(regexifyOptions(songsArray), function (msg, match) {
   var fromId = msg.chat.id;
   var resp = match[0];
-  bot.sendMessage(fromId, resp)
-  // var index = songsArray.indexOf(resp)
-  // switch (index) {
-  //   case 0:
-  //     break;
-  //   case 1:
-  //     break;
-  //   case 2:
-  //     break;
-  //   case 3:
-  //     break;
-  //   case 4:
-  //     break;
-  //   case 5:
-  //     break;
-  //   case 6:
-  //     break;
-  //   case 7:
-  //     break;
-  //   case 8:
-  //     break;
-  //   case 9:
-  //     break;
-  //   default:
-  //     break;
-  // }
+  var index = songsArray.indexOf(resp)
+  switch (index) {
+    case 0: // Glass Bead
+      bot.sendMessage(fromId, "https://youtu.be/GU7icQFVzHo")
+      break;
+    case 1: // Me Gustas Ti
+    bot.sendMessage(fromId, "https://youtu.be/bjRMhQpOYAM")
+      break;
+    case 2: // Rough
+    bot.sendMessage(fromId, "https://youtu.be/0VKcLPdY9lI")
+      break;
+    case 3: // Navillera
+    bot.sendMessage(fromId, "https://youtu.be/Se8bbsUFjC8")
+      break;
+    case 4: // Fingertip
+    bot.sendMessage(fromId, "https://youtu.be/i1n_1jrUEjU")
+      break;
+    case 5: // Love Whisper
+    bot.sendMessage(fromId, "https://youtu.be/lnXXfYA91Y8")
+      break;
+    case 6: // Summer Rain
+    bot.sendMessage(fromId, "https://youtu.be/ZsYwEV_ge4Y")
+      break;
+    case 7: // Time For The Moon Nught
+    bot.sendMessage(fromId, "https://youtu.be/_XyBa8QsVQU")
+      break;
+    case 8: // Sunny Summer
+    bot.sendMessage(fromId, "https://youtu.be/9iPLjmz3_U4")
+      break;
+    case 9: // Memoria
+    bot.sendMessage(fromId, "https://youtu.be/YTWwz6R6jy0")
+      break;
+    default:
+      bot.sendMessage(fromId, "Eunha is sorry, I haven't sing " + resp.replace(/\//g, "").replace(/_/g, " "))
+      break;
+  }
 })
