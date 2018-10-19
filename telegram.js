@@ -127,11 +127,9 @@ bot.onText(/\/sing/, function (msg) {
 });
 
 bot.onText(regexifyOptions(songsArray), function (msg, match) {
-  console.log(msg)
-  console.log(match)
   var fromId = msg.chat.id;
-  bot.sendMessage(fromId, "test")
-  // var resp = match[1];
+  var resp = match[0];
+  bot.sendMessage(fromId, resp)
   // var index = songsArray.indexOf(resp)
   // switch (index) {
   //   case 0:
