@@ -13,7 +13,7 @@ bot.onText(/\/echo (.+)/, function (msg, match) {
 });
 
 function regexifyOptions(array) {
-  return new RegExp(array.toString().replace(/,/g, '|'));
+  return new RegExp(array.toString().replace(/,/g, '|').replace(/\//g, '\\/'));
 }
 
 var songsArray = [
@@ -88,6 +88,9 @@ bot.onText(/\/run/, function (msg) {
       calculateNewTime(fromId)
     }else
       bot.sendMessage(fromId, "jalankan /stop dulu");
+  } else {
+    bot.sendMessage(fromId, "Hello, I'm Eunha from GFriend. I will remind you for daily standUp Meeting. Saranghae <3.")
+    calculateNewTime(fromId)
   }
 });
 
