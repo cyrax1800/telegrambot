@@ -59,8 +59,8 @@ function calculateNewTime(fromId, isAnnounceBefore = true) {
   } else if (targetTime.days() == 6) { // Saturday
     timeInterval += 86400000 * 2
   }
-  timeScheduleInterval[fromId] = timeInterval
   targetTime = currentTime.clone().milliseconds(timeInterval)
+  timeScheduleInterval[fromId] = targetTime
   // bot.sendMessage(fromId, "Will Stand Up " + currentTime.to(targetTime) + "\nJam: " + predictedTime.format() +  "\nJam: " + currentTime.format()+  "\nJam: " + targetTime.format())
   runNotif(fromId, isAnnounceBefore)
 }
@@ -85,12 +85,12 @@ bot.onText(/\/run/, function (msg) {
   var fromId = msg.chat.id;
   if (fromId in group) {
     if (group[fromId] == null){
-      bot.sendMessage(fromId, "Hello, I'm Eunha from GFriend. I will remind you for daily standUp Meeting. Saranghae <3.")
+      bot.sendMessage(fromId, "Hello, I'm Eunha from GFriend. Eunha will remind you for daily standUp Meeting. Saranghae <3.")
       calculateNewTime(fromId)
     }else
-      bot.sendMessage(fromId, "Sabar dong fans Eunha, saya hanya bot Eunha yang cute, Tugas reminder yang di kasih sudah di jalankan koq, tunggu aja waktunya dalam " + timeScheduleInterval[fromId] + " " + moment(timeScheduleInterval[fromId]).format) + " atau jalan /stop untuk melupakan Eunha T_T.";
+      bot.sendMessage(fromId, "Sabar dong fans Eunha, saya hanya bot Eunha yang cute, Tugas reminder yang di kasih sudah di jalankan koq, tunggu aja waktunya dalam " + timeScheduleInterval[fromId].format() + " atau jalan /stop untuk melupakan Eunha T_T.");
   } else {
-    bot.sendMessage(fromId, "Hello, I'm Eunha from GFriend. I will remind you for daily standUp Meeting. Saranghae <3.")
+    bot.sendMessage(fromId, "Hello, I'm Eunha from GFriend. Eunha will remind you for daily standUp Meeting. Saranghae <3.")
     calculateNewTime(fromId)
   }
 });
@@ -98,7 +98,7 @@ bot.onText(/\/run/, function (msg) {
 bot.onText(/\/info/, function (msg) {
   var fromId = msg.chat.id;
   if (fromId in timeScheduleInterval) {
-    bot.sendMessage(fromId, "Ih.. gak sabaren banget sih untuk tau kapan standup. masih ada sisa waktu " + moment(timeScheduleInterval[fromId]).toNow(true) + ". atau gk sabaran ketemu saya? <3");
+    bot.sendMessage(fromId, "Ih.. gak sabaren banget sih untuk tau kapan standup. masih ada sisa waktu " + timeScheduleInterval[fromId].toNow(true) + ". atau gk sabaran ketemu saya? <3");
   } else {
     bot.sendMessage(fromId, "Ooops, maaf fans Eunha, belum ada schedule untuk next event nih, coba jalankan /run dulu, mana tau doa dari kamu dapat Eunha kabulkan <3.")
   }
@@ -110,7 +110,7 @@ bot.onText(/\/stop/, function (msg) {
   if(fromId in group) {
     clearTimeout(group[fromId]);
     delete group[fromId]
-    bot.sendMessage(fromId, "Goodbye my fans, I will miss you all. I always in your heart. If you miss me, you can call /run and I will join you again. <3.")
+    bot.sendMessage(fromId, "Goodbye Eunha fans, Eunha will miss you all. Eunha always in your heart. If you miss Eunha, you can call /run and Eunha will join you again. <3.")
   } else {
     bot.sendMessage(fromId, "I already don't remind in this group again. Please if you miss me, just call /run and I will at your service. <3.")
   }
@@ -122,7 +122,7 @@ bot.onText(/\/sing/, function (msg) {
   songsArray.forEach(element => {
     text += element + "\n"
   });
-  text += "\nPlease Choose one of above, and i will sing for you <3"
+  text += "\nPlease Choose one of above, and Eunha will sing for you <3"
   bot.sendMessage(fromId, text)
 });
 
@@ -162,7 +162,7 @@ bot.onText(regexifyOptions(songsArray), function (msg, match) {
     bot.sendMessage(fromId, "https://youtu.be/YTWwz6R6jy0")
       break;
     default:
-      bot.sendMessage(fromId, "Eunha is sorry, I haven't sing " + resp.replace(/\//g, "").replace(/_/g, " "))
+      bot.sendMessage(fromId, "Eunha is sorry, Eunha haven't sing " + resp.replace(/\//g, "").replace(/_/g, " "))
       break;
   }
 })
