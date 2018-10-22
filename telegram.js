@@ -167,9 +167,14 @@ bot.onText(regexifyOptions(songsArray), function (msg, match) {
   }
 })
 
-bot.onText(/[WK]{5,}/, function(msg) {
+bot.on('message', function(msg) {
   var fromId = msg.chat.id;
   var userName = msg.from.first_name
-
-  bot.sendMessage(from, "Eh " + userName + ", sabar dong, gak usah ngegas juga, Eunha tau kalau Eunha cure <3.")
+  var regExp = new RegExp(/[WK]{5,}/, 'g')
+  if(regExp.text(msg.text)) {
+    bot.sendMessage(from, "Eh " + userName + ", sabar dong, gak usah ngegas juga, Eunha tau kalau Eunha cure <3.")
+  }
+  if(regExp.exec(msg.text).length > 0) {
+    bot.sendMessage(from, "Eh " + userName + ", sabar dong, gak usah ngegas juga, Eunha tau kalau Eunha cure <3.")
+  }
 })
