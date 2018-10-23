@@ -167,15 +167,15 @@ bot.onText(regexifyOptions(songsArray), function (msg, match) {
   }
 })
 
-// bot.on('message', function(msg) {
-//   var fromId = msg.chat.id;
-//   var userName = msg.from.first_name
-//   var regExp = new RegExp(/[WK]{5,}/, 'g')
-//   bot.sendMessage(fromId, msg.text)
-//   if(regExp.test(msg.text)) {
-//     bot.sendMessage(from, "Eh " + userName + ", sabar dong, gak usah ngegas juga, Eunha tau kalau Eunha cure <3.")
-//   }
-//   if(regExp.exec(msg.text).length > 0) {
-//     bot.sendMessage(from, "Eh " + userName + ", sabar dong, gak usah ngegas juga, Eunha tau kalau Eunha cure <3.")
-//   }
-// })
+bot.onText(/[WK]{5,}/, function(msg, match) {
+  var fromId = msg.chat.id;
+  var userName = msg.from.first_name
+  // var regExp = new RegExp(/[WK]{5,}/, 'g')
+  bot.sendMessage(fromId, msg.text)
+  // if(regExp.test(msg.text)) {
+  //   bot.sendMessage(from, "Eh " + userName + ", sabar dong, gak usah ngegas juga, Eunha tau kalau Eunha cure <3.")
+  // }
+  // if(regExp.exec(msg.text).length > 0) {
+  //   bot.sendMessage(from, "Eh " + userName + ", sabar dong, gak usah ngegas juga, Eunha tau kalau Eunha cure <3.")
+  // }
+})
