@@ -45,6 +45,7 @@ function calculateNewTime(fromId, isAnnounceBefore = true) {
     calculateNewTime(fromId, !isAnnounceBefore)
     return
   }
+  bot.sendMessage(fromId, isAnnounceBefore)
   // bot.sendMessage(fromId, "current: " + currentTime.format() + "\nExpected: " + predictedTime.format() + "\nDiffTime: " + diffTime);
   if (diffTime > 0) {
     timeInterval = diffTime
